@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../firebase";
-import { setDoc, doc, Timestamp } from "firebase/firestore";
+import { updateDoc, doc } from "firebase/firestore";
 
 import { useHistory } from "react-router-dom";
 
-const Register = () => {
+const Login = () => {
   const [data, setData] = useState({
-    name: "",
     email: "",
     password: "",
     error: null,
@@ -26,35 +25,27 @@ const Register = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setData({ ...data, error: null, loading: true });
-    if (!name || !email || !password) {
+    if (!email || !password) {
       setData({ ...data, error: "All Fields are Require" });
     }
     try {
-      const result = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
+      const result = await signInWithEmailAndPassword(auth, email, password);
+
+      // this was for earlier version in firebase
+      // firebase.firestore().collection().doc().updateDoc;
 
       //setting the user information in firebase
-      await setDoc(doc(db, "users", result.user.uid), {
-        uid: result.user.uid,
-        name,
-        email,
-        createAt: Timestamp.fromDate(new Date()),
+      await updateDoc(doc(db, "users", result.user.uid), {
         isOnline: true,
       });
       //resetting the stats
       setData({
-        name: "",
         email: "",
         password: "",
         error: null,
         loading: false,
       });
       history.replace("/");
-      // This was for the old version that is how we were passing the data to firebase
-      //   firebase.firestore().collection("users").doc(id).set({});
     } catch (err) {
       setData({ ...data, error: err.message, loading: false });
     }
@@ -62,18 +53,8 @@ const Register = () => {
 
   return (
     <section>
-      <h2>Create An Account</h2>
+      <h2>Login into your Account</h2>
       <form className="form" onSubmit={handleSubmit}>
-        <div className="input_container">
-          <label htmlFor="name">Name</label>
-          <input
-            type="text"
-            name="name"
-            placeholder="Please enter your name"
-            value={name}
-            onChange={handleChange}
-          />
-        </div>
         <div className="input_container">
           <label htmlFor="email">Email</label>
           <input
@@ -97,7 +78,7 @@ const Register = () => {
         {error ? <p className="error">{error} </p> : null}
         <div className="btn_container">
           <button className="btn" disabled={loading}>
-            {loading ? "Signning up" : "Sign-up"}
+            {loading ? "Logging in ..." : "Login"}
           </button>
         </div>
       </form>
@@ -105,4 +86,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Login;
