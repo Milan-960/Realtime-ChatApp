@@ -16,7 +16,7 @@ const Login = () => {
 
   const history = useHistory();
 
-  const { name, email, password, error, loading } = data;
+  const { email, password, error, loading } = data;
 
   const handleChange = (event) => {
     setData({ ...data, [event.target.name]: event.target.value });
