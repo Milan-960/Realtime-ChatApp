@@ -8,7 +8,7 @@
   --color-3: #0084ff;
   --color-4: grey;
   --color-5: #eb4034;
-  --color-6: #333;
+  --color-6: #c0dfff;
 }
 
 /* Navbar */
@@ -27,7 +27,6 @@ nav a {
 }
 nav div a {
   margin-right: 20px;
-  font-size: 22px;
 }
 
 section {
@@ -43,13 +42,7 @@ section h3 {
   font-size: 20px;
   color: var(--color-4);
 }
-
 /* Register */
-
-h2 {
-  text-align: center;
-}
-
 section .form {
   margin-top: 30px;
   padding: 0px 20px;
@@ -155,18 +148,16 @@ section .form {
 }
 .user_detail h4 {
   margin-left: 10px;
-  font-size: 20px;
-  font-weight: 700;
 }
 .avatar {
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   border: 1px solid var(--color-4);
 }
 .user_status {
-  width: 15px;
-  height: 15px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
 }
 .online {
@@ -286,7 +277,7 @@ section .form {
     grid-template-columns: 1fr 5fr;
   }
   .user_wrapper {
-    /* display: none; */
+    display: none;
   }
   .sm_container {
     padding: 10px 0px;

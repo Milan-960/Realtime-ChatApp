@@ -52,7 +52,7 @@ const Profile = () => {
       uploadImg();
     }
     //This in here in the future we might have to remove the empty dependencies
-  }, [img, user.avatarPath]);
+  }, [img]);
 
   // This is the delete img function for the avatar
 

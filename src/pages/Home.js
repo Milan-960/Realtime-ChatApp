@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 
 import User from "../components/Users/user";
 import MessagesForm from "../components/MessagesForm/Form";
+import Message from "../components/Messages/Messages";
 
-import { db, auth } from "../firebase";
+import { db, auth, storage } from "../firebase";
 import {
   collection,
   query,
@@ -11,12 +12,20 @@ import {
   onSnapshot,
   addDoc,
   Timestamp,
-} from "@firebase/firestore";
+  orderBy,
+  setDoc,
+  doc,
+  getDoc,
+  updateDoc,
+} from "firebase/firestore";
+import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
 
 const Home = () => {
   const [users, setUsers] = useState([]);
   const [chat, setChat] = useState("");
   const [text, setText] = useState("");
+  const [img, setImg] = useState("");
+  const [mas, setMas] = useState("");
 
   const user1 = auth.currentUser.uid;
 
@@ -36,11 +45,25 @@ const Home = () => {
     });
     return () => unsub();
   }, []);
-  console.log(users);
+  // console.log(users);
 
   const selectUser = (user) => {
     setChat(user);
-    console.log(user);
+    // console.log(user);
+
+    const user2 = user.uid;
+    const id = user1 > user2 ? `${user1 + user2}` : `${user2 + user1}`;
+
+    const msgRef = collection(db, "messages", id, "chat");
+    const q = query(msgRef, orderBy("createAt", "asc"));
+
+    onSnapshot(q, (querySnapshot) => {
+      let mas = [];
+      querySnapshot.forEach((doc) => {
+        mas.push(doc.data());
+      });
+      setMas(mas);
+    });
   };
 
   //this function is for store all the text messages
@@ -49,22 +72,51 @@ const Home = () => {
     e.preventDefault();
 
     const user2 = chat.uid;
+
     const id = user1 > user2 ? `${user1 + user2}` : `${user2 + user1}`;
+
+    let url;
+    if (img) {
+      const imgRef = ref(
+        storage,
+        `images/${new Date().getTime()} - ${img.name}`
+      );
+      const snap = await uploadBytes(imgRef, img);
+      const dlUrl = await getDownloadURL(ref(storage, snap.ref.fullPath));
+      url = dlUrl;
+    }
 
     await addDoc(collection(db, "messages", id, "chat"), {
       text,
       form: user1,
       to: user2,
       createAt: Timestamp.fromDate(new Date()),
+      media: url || "",
     });
+
+    await setDoc(doc(db, "lastMsg", id), {
+      text,
+      form: user1,
+      to: user2,
+      createAt: Timestamp.fromDate(new Date()),
+      media: url || "",
+      unread: true,
+    });
+
     setText("");
+    setImg("");
   };
 
   return (
     <div className="home_container">
       <div className="users_container">
         {users.map((user) => (
-          <User key={user.uid} user={user} selectUser={selectUser} />
+          <User
+            key={user.uid}
+            user={user}
+            selectUser={selectUser}
+            user1={user1}
+          />
         ))}
       </div>
 
@@ -76,10 +128,18 @@ const Home = () => {
               {/* Need to show an img as well */}
               {/* <h3>{chat.img}</h3> */}
             </div>
+            <div className="messages">
+              {mas.length
+                ? mas.map((msg, i) => (
+                    <Message key={i} msg={msg} user1={user1} />
+                  ))
+                : null}
+            </div>
             <MessagesForm
               handleSubmit={handleSubmit}
               text={text}
               setText={setText}
+              setImg={setImg}
             />
           </>
         ) : (
