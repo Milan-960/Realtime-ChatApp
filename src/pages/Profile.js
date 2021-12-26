@@ -51,7 +51,10 @@ const Profile = () => {
       };
       uploadImg();
     }
-  }, [img]);
+    //This in here in the future we might have to remove the empty dependencies
+  }, [img, user.avatarPath]);
+
+  // This is the delete img function for the avatar
 
   const deleteImage = async () => {
     try {
@@ -94,7 +97,7 @@ const Profile = () => {
           <h3>{user.name}</h3>
           <p>{user.email}</p>
           <hr />
-          <small>You Joined on: {user.createdAt.toDate().toDateString()}</small>
+          <small>Joined on: {user.createAt.toDate().toDateString()}</small>
         </div>
       </div>
     </section>

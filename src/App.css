@@ -155,16 +155,18 @@ section .form {
 }
 .user_detail h4 {
   margin-left: 10px;
+  font-size: 20px;
+  font-weight: 700;
 }
 .avatar {
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   border: 1px solid var(--color-4);
 }
 .user_status {
-  width: 10px;
-  height: 10px;
+  width: 15px;
+  height: 15px;
   border-radius: 50%;
 }
 .online {
@@ -284,7 +286,7 @@ section .form {
     grid-template-columns: 1fr 5fr;
   }
   .user_wrapper {
-    display: none;
+    /* display: none; */
   }
   .sm_container {
     padding: 10px 0px;
