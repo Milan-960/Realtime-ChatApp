@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
+
 import Camera from "../components/svg/Img";
 import Img from "../components/svg/demo.png";
+import Delete from "../components/svg/delete";
+
 import { storage, db, auth } from "../firebase";
 import {
   ref,
@@ -9,8 +13,6 @@ import {
   deleteObject,
 } from "firebase/storage";
 import { getDoc, doc, updateDoc } from "firebase/firestore";
-import Delete from "../components/svg/delete";
-import { useHistory } from "react-router-dom";
 
 const Profile = () => {
   const [img, setImg] = useState("");
@@ -53,7 +55,7 @@ const Profile = () => {
 
   const deleteImage = async () => {
     try {
-      const confirm = window.confirm("Delete avatar?");
+      const confirm = window.confirm("Are you sure to delete the avatar?");
       if (confirm) {
         await deleteObject(ref(storage, user.avatarPath));
 
