@@ -1,10 +1,9 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../firebase";
 import { setDoc, doc, Timestamp } from "firebase/firestore";
-
-import { useHistory } from "react-router-dom";
 
 const Register = () => {
   const [data, setData] = useState({
@@ -19,15 +18,15 @@ const Register = () => {
 
   const { name, email, password, error, loading } = data;
 
-  const handleChange = (event) => {
-    setData({ ...data, [event.target.name]: event.target.value });
+  const handleChange = (e) => {
+    setData({ ...data, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     setData({ ...data, error: null, loading: true });
     if (!name || !email || !password) {
-      setData({ ...data, error: "All Fields are Require" });
+      setData({ ...data, error: "All fields are required" });
     }
     try {
       const result = await createUserWithEmailAndPassword(
@@ -44,6 +43,7 @@ const Register = () => {
         createAt: Timestamp.fromDate(new Date()),
         isOnline: true,
       });
+
       //resetting the stats
       setData({
         name: "",
@@ -53,33 +53,26 @@ const Register = () => {
         loading: false,
       });
       history.replace("/");
+
       // This was for the old version that is how we were passing the data to firebase
       //   firebase.firestore().collection("users").doc(id).set({});
     } catch (err) {
       setData({ ...data, error: err.message, loading: false });
     }
   };
-
   return (
     <section>
-      <h2>Create An Account</h2>
+      <h3>Create An Account</h3>
       <form className="form" onSubmit={handleSubmit}>
         <div className="input_container">
           <label htmlFor="name">Name</label>
-          <input
-            type="text"
-            name="name"
-            placeholder="Please enter your name"
-            value={name}
-            onChange={handleChange}
-          />
+          <input type="text" name="name" value={name} onChange={handleChange} />
         </div>
         <div className="input_container">
           <label htmlFor="email">Email</label>
           <input
             type="text"
             name="email"
-            placeholder="Please enter your Email"
             value={email}
             onChange={handleChange}
           />
@@ -89,15 +82,14 @@ const Register = () => {
           <input
             type="password"
             name="password"
-            placeholder="Please enter you password"
             value={password}
             onChange={handleChange}
           />
         </div>
-        {error ? <p className="error">{error} </p> : null}
+        {error ? <p className="error">{error}</p> : null}
         <div className="btn_container">
           <button className="btn" disabled={loading}>
-            {loading ? "Signning up" : "Sign-up"}
+            {loading ? "Creating ..." : "Register"}
           </button>
         </div>
       </form>

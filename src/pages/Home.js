@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import User from "../components/Users/user";
-import MessagesForm from "../components/MessagesForm/Form";
+import MessageForm from "../components/MessagesForm/Form";
 import Message from "../components/Messages/Messages";
 
 import { db, auth, storage } from "../firebase";
@@ -25,16 +25,14 @@ const Home = () => {
   const [chat, setChat] = useState("");
   const [text, setText] = useState("");
   const [img, setImg] = useState("");
-  const [mas, setMas] = useState("");
+  const [msgs, setMsgs] = useState([]);
 
   const user1 = auth.currentUser.uid;
 
   useEffect(() => {
     const usersRef = collection(db, "users");
-
-    //create query object
+    // create query object
     const q = query(usersRef, where("uid", "not-in", [user1]));
-
     // execute query
     const unsub = onSnapshot(q, (querySnapshot) => {
       let users = [];
@@ -46,29 +44,33 @@ const Home = () => {
     return () => unsub();
   }, []);
 
-  // console.log(users);
-
-  const selectUser = (user) => {
+  const selectUser = async (user) => {
     setChat(user);
-    // console.log(user);
 
     const user2 = user.uid;
     const id = user1 > user2 ? `${user1 + user2}` : `${user2 + user1}`;
 
-    const msgRef = collection(db, "messages", id, "chat");
-    const q = query(msgRef, orderBy("createAt", "asc"));
+    const msgsRef = collection(db, "messages", id, "chat");
+    const q = query(msgsRef, orderBy("createAt", "asc"));
 
     onSnapshot(q, (querySnapshot) => {
-      let mas = [];
+      let msgs = [];
       querySnapshot.forEach((doc) => {
-        mas.push(doc.data());
+        msgs.push(doc.data());
       });
-      setMas(mas);
+      setMsgs(msgs);
     });
+
+    // get last message b/w logged in user and selected user
+    const docSnap = await getDoc(doc(db, "lastMsg", id));
+    // if last message exists and message is from selected user
+    if (docSnap.data() && docSnap.data().from !== user1) {
+      // update last message doc, set unread to false
+      await updateDoc(doc(db, "lastMsg", id), { unread: false });
+    }
   };
 
   //this function is for store all the text messages
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -89,7 +91,7 @@ const Home = () => {
 
     await addDoc(collection(db, "messages", id, "chat"), {
       text,
-      form: user1,
+      from: user1,
       to: user2,
       createAt: Timestamp.fromDate(new Date()),
       media: url || "",
@@ -97,7 +99,7 @@ const Home = () => {
 
     await setDoc(doc(db, "lastMsg", id), {
       text,
-      form: user1,
+      from: user1,
       to: user2,
       createAt: Timestamp.fromDate(new Date()),
       media: url || "",
@@ -107,7 +109,6 @@ const Home = () => {
     setText("");
     setImg("");
   };
-
   return (
     <div className="home_container">
       <div className="users_container">
@@ -117,10 +118,10 @@ const Home = () => {
             user={user}
             selectUser={selectUser}
             user1={user1}
+            chat={chat}
           />
         ))}
       </div>
-
       <div className="messages_container">
         {chat ? (
           <>
@@ -130,13 +131,13 @@ const Home = () => {
               {/* <h3>{chat.img}</h3> */}
             </div>
             <div className="messages">
-              {mas.length
-                ? mas.map((msg, i) => (
+              {msgs.length
+                ? msgs.map((msg, i) => (
                     <Message key={i} msg={msg} user1={user1} />
                   ))
                 : null}
             </div>
-            <MessagesForm
+            <MessageForm
               handleSubmit={handleSubmit}
               text={text}
               setText={setText}
@@ -144,7 +145,7 @@ const Home = () => {
             />
           </>
         ) : (
-          <h3 className="no_conv"> Select a user to start the conversation</h3>
+          <h3 className="no_conv">Select a user to start conversation</h3>
         )}
       </div>
     </div>

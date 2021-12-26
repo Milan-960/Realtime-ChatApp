@@ -1,10 +1,9 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../firebase";
 import { updateDoc, doc } from "firebase/firestore";
-
-import { useHistory } from "react-router-dom";
 
 const Login = () => {
   const [data, setData] = useState({
@@ -18,23 +17,23 @@ const Login = () => {
 
   const { email, password, error, loading } = data;
 
-  const handleChange = (event) => {
-    setData({ ...data, [event.target.name]: event.target.value });
+  const handleChange = (e) => {
+    setData({ ...data, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     setData({ ...data, error: null, loading: true });
     if (!email || !password) {
-      setData({ ...data, error: "All Fields are Require" });
+      setData({ ...data, error: "All fields are required" });
     }
     try {
-      const result = await signInWithEmailAndPassword(auth, email, password);
-
       // this was for earlier version in firebase
       // firebase.firestore().collection().doc().updateDoc;
 
       //setting the user information in firebase
+      const result = await signInWithEmailAndPassword(auth, email, password);
+
       await updateDoc(doc(db, "users", result.user.uid), {
         isOnline: true,
       });
@@ -50,17 +49,15 @@ const Login = () => {
       setData({ ...data, error: err.message, loading: false });
     }
   };
-
   return (
     <section>
-      <h2>Login into your Account</h2>
+      <h3>Log into your Account</h3>
       <form className="form" onSubmit={handleSubmit}>
         <div className="input_container">
           <label htmlFor="email">Email</label>
           <input
             type="text"
             name="email"
-            placeholder="Please enter your Email"
             value={email}
             onChange={handleChange}
           />
@@ -70,12 +67,11 @@ const Login = () => {
           <input
             type="password"
             name="password"
-            placeholder="Please enter you password"
             value={password}
             onChange={handleChange}
           />
         </div>
-        {error ? <p className="error">{error} </p> : null}
+        {error ? <p className="error">{error}</p> : null}
         <div className="btn_container">
           <button className="btn" disabled={loading}>
             {loading ? "Logging in ..." : "Login"}

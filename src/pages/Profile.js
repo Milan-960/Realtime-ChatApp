@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
 import Camera from "../components/svg/Img";
-import Img from "../components/svg/demo.png";
 import Delete from "../components/svg/delete";
+
+import Img from "../components/svg/demo.png";
 
 import { storage, db, auth } from "../firebase";
 import {
@@ -55,10 +56,9 @@ const Profile = () => {
   }, [img]);
 
   // This is the delete img function for the avatar
-
   const deleteImage = async () => {
     try {
-      const confirm = window.confirm("Are you sure to delete the avatar?");
+      const confirm = window.confirm("Delete avatar?");
       if (confirm) {
         await deleteObject(ref(storage, user.avatarPath));
 

@@ -8,7 +8,7 @@ import Navbar from "./components/navbar/navbar";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
-import HomeRoute from "./components/HomeRoute";
+import HomeRoute from "./components/Home/HomeRoute";
 
 import AuthProvider from "./context/auth";
 
