@@ -5,8 +5,8 @@ const Attachment = () => {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       style={{
-        width: "25px",
-        height: "25px",
+        width: "26px",
+        height: "26px",
         cursor: "pointer",
         color: "gray",
       }}
