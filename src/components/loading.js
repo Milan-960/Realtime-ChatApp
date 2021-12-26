@@ -12,7 +12,7 @@ const Loading = () => {
           fontSize: "30px",
         }}
       >
-        Loading....😎
+        Loading...😎
       </h2>
     </div>
   );
