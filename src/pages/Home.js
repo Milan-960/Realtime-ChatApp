@@ -42,7 +42,7 @@ const Home = () => {
       setUsers(users);
     });
     return () => unsub();
-  });
+  }, []);
 
   const selectUser = async (user) => {
     setChat(user);
