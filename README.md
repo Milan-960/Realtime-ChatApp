@@ -6,7 +6,9 @@ This project is built with Reactjs and latest Firebase SDK version 9.6.1
 
 ## Run the app
 
-### https://github.com/Milan-960/Realtime-ChatApp.git "@github/clipboard-copy-element"
+```
+### https://github.com/Milan-960/Realtime-ChatApp.git @github/clipboard-copy-element
+```
 
 - Clone this repository 😎
 
@@ -14,12 +16,13 @@ This project is built with Reactjs and latest Firebase SDK version 9.6.1
 
 - Run **npm dotenv**
 
-<img align="right" src="./public/env.png" width="100%"/>\
-<br>
+<img align="right" src="./public/env.png" width="100%"/>
+<br>\
+</br>\
 
 ## This is the firebase config which you will need to change to run this project with your firebase APIS..
 
-- Create **.env** file at root level of project and add\
+- Create **.env** file at root level of project and add
 
   REACT_APP_API_KEY=HERE_WILL_BE_YOUR_FIREBASE_API_KEY,\
    REACT_APP_AUTH_DOMAIN=HERE_WILL_BE_YOUR_FIREBASE_DOMAIN,\
