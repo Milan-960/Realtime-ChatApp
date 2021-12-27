@@ -16,8 +16,8 @@ $ https://github.com/Milan-960/Realtime-ChatApp.git @github/clipboard-copy-eleme
 
 - Run **npm dotenv**
 
-<img align="right" src="./public/env.png" width="100%"/>
-<br>
+<img align="right" src="./public/env.png" width="100%"/>\
+<br>\
 </br>
 
 ## This is the firebase config which you will need to change to run this project with your firebase APIS..
@@ -34,6 +34,5 @@ $ https://github.com/Milan-960/Realtime-ChatApp.git @github/clipboard-copy-eleme
 
 - Value of REACT_APP_DATABASE_URL will be https://YOUR-FIREBASE-PROJECT-NAME.firebaseio.com
   simply replace YOUR-FIREBASE-PROJECT-NAME with your project name!!
-
 
 # Realtime-ChatApp 💬
