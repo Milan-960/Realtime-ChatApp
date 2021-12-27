@@ -16,9 +16,9 @@ $ https://github.com/Milan-960/Realtime-ChatApp.git @github/clipboard-copy-eleme
 
 - Run **npm dotenv**
 
-<img align="right" src="./public/env.png" width="100%"/>\
+<img align="right" src="./public/env.png" width="100%"/>
 <br>\
-</br>
+</br>\
 
 ## This is the firebase config which you will need to change to run this project with your firebase APIS..
 
