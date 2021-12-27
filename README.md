@@ -7,7 +7,7 @@ This project is built with Reactjs and latest Firebase SDK version 9.6.1
 ## Run the app
 
 ```@github/clipboard-copy-element
-$ https://github.com/Milan-960/Realtime-ChatApp.git
+git clone https://github.com/Milan-960/Realtime-ChatApp.git
 ```
 
 - Clone this repository 😎
