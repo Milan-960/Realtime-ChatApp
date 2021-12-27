@@ -16,7 +16,7 @@ $ https://github.com/Milan-960/Realtime-ChatApp.git @github/clipboard-copy-eleme
 
 - Run **npm dotenv**
 
-<img align="right" src="./public/env.png" width="100%"/>
+<img align="right" src="./public/env.png" width="100%"/>\
 <br>\
 </br>
 
@@ -24,6 +24,7 @@ $ https://github.com/Milan-960/Realtime-ChatApp.git @github/clipboard-copy-eleme
 
 - Create **.env** file at root level of project and add
 
+```  @github/clipboard-copy-element
   REACT_APP_API_KEY=HERE_WILL_BE_YOUR_FIREBASE_API_KEY,\
    REACT_APP_AUTH_DOMAIN=HERE_WILL_BE_YOUR_FIREBASE_DOMAIN,\
    REACT_APP_DATABASE_URL=HERE_WILL_BE_YOUR_DATABASE_LINK,\
@@ -31,6 +32,7 @@ $ https://github.com/Milan-960/Realtime-ChatApp.git @github/clipboard-copy-eleme
    REACT_APP_STORAGE_BUCKET=HERE_WILL_BE_YOUR_FIREBASE_STORAGE,\
    REACT_APP_MESSAGING_SENDER_ID=HERE_WILL_BE_YOUR_FIREBASE_SENDER_ID,\
    REACT_APP_APP_ID=HERE_WILL_BE_YOUR_FIREBASE_APP_ID,\
+```
 
 - Value of REACT_APP_DATABASE_URL will be https://YOUR-FIREBASE-PROJECT-NAME.firebaseio.com
   simply replace YOUR-FIREBASE-PROJECT-NAME with your project name!!
