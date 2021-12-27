@@ -6,7 +6,7 @@ This project is built with Reactjs and latest Firebase SDK version 9.6.1
 
 ## Run the app
 
-$ https://github.com/Milan-960/Realtime-ChatApp.git "@github/clipboard-copy-element"
+## https://github.com/Milan-960/Realtime-ChatApp.git @github/clipboard-copy-element
 
 - Clone this repository 😎
 
@@ -32,24 +32,5 @@ $ https://github.com/Milan-960/Realtime-ChatApp.git "@github/clipboard-copy-elem
 - Value of REACT_APP_DATABASE_URL will be https://YOUR-FIREBASE-PROJECT-NAME.firebaseio.com
   simply replace YOUR-FIREBASE-PROJECT-NAME with your project name!!
 
-## Available Scripts
 
-In the project directory, you can run:
-
-### RUN `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-# Realtime-ChatApp
+# Realtime-ChatApp 💬
