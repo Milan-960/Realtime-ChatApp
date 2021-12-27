@@ -26,17 +26,11 @@ This project is built with Reactjs and latest Firebase SDK version 9.6.1
 - Value of REACT_APP_DATABASE_URL will be https://YOUR-FIREBASE-PROJECT-NAME.firebaseio.com
   simply replace YOUR-FIREBASE-PROJECT-NAME with your project name!!
 
-- Run **npm start**
-
-[YouTube video tutorial](https://youtu.be/fdcruaIiQxc)
-
-[Text based and video tutorials](https://farhanfarooq.com/tutorials)
-
 ## Available Scripts
 
 In the project directory, you can run:
 
-### `npm start`
+### RUN `npm start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
