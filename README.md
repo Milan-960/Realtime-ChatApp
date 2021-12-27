@@ -6,14 +6,14 @@ This project is built with Reactjs and latest Firebase SDK version 9.6.1
 
 ## Run the app
 
-- Clone this repository 😎 ## https://github.com/Milan-960/Realtime-ChatApp.git
+- Clone this repository 😎 $ https://github.com/Milan-960/Realtime-ChatApp.git @github/clipboard-copy-element
 
 - Run **npm install**
 
 - Run **npm dotenv**
 
 <img align="right" src="./public/env.png" width="100%"/>
-</br>
+<br>
 
 ## This is the firebase config which you will need to change to run this project with your firebase APIS..
 
