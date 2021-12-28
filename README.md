@@ -18,7 +18,6 @@ git clone https://github.com/Milan-960/Realtime-ChatApp.git
 
 <img align="right" src="./public/env.png" width="100%"/>
 <br/>
-</br>
 
 ## This is the firebase config which you will need to change to run this project with your firebase APIS..
 
